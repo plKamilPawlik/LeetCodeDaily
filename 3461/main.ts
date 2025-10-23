@@ -1,20 +1,20 @@
 function hasSameDigits(s: string): boolean {
 	const mod = 10;
+	const arr = s.split("").map((c) => Number(c));
+	let round = s.length - 2;
 
-	while (s.length > 2) {
-		const arr: number[] = [];
+	while (round) {
+		for (let i = 0; i < round + 1; i++) {
+			const a = arr[i];
+			const b = arr[i + 1];
 
-		for (let i = 1; i < s.length; i++) {
-			const a = +s[i - 1];
-			const b = +s[i];
-
-			arr.push((a + b) % mod);
+			arr[i] = (a + b) % mod;
 		}
 
-		s = arr.join("");
+		round--;
 	}
 
-	return s[0] === s[1];
+	return arr[0] === arr[1];
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
