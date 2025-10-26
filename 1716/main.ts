@@ -1,16 +1,10 @@
 function totalMoney(n: number): number {
-	let day = 0;
-	let sum = 0;
+	const n_weaks = Math.floor(n / 7);
+	const n_days = n % 7;
 
-	while (day < n) {
-		const $week = Math.floor(day / 7);
-		const $weekday = 1 + (day % 7);
+	const sum = (x: number): number => ((x + 1) / 2) * x;
 
-		sum += $week + $weekday;
-		day += 1;
-	}
-
-	return sum;
+	return 28 * n_weaks + 7 * sum(n_weaks - 1) + sum(n_days) + n_weaks * n_days;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
