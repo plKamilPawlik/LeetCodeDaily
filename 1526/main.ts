@@ -1,15 +1,15 @@
 function minNumberOperations(target: number[]): number {
-    let numSteps = target[0];
+	let numSteps = target[0];
 
-    for (let i = 1; i < target.length; i++) {
-        const prev = target[i - 1]
-        const curr = target[i]
+	for (let i = 1; i < target.length; i++) {
+		const prev = target[i - 1];
+		const curr = target[i];
 
-        // only increment at rising edge
-        if (curr > prev) numSteps += curr - prev;
-    }
+		// only increment at rising edge
+		if (curr > prev) numSteps += curr - prev;
+	}
 
-    return numSteps;
+	return numSteps;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
