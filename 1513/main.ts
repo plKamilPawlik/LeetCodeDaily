@@ -12,6 +12,7 @@ function numSub(s: string): number {
 		}
 
 		res += Math.floor(((n + 1) * n) / 2);
+		res %= mod
 	}
 
 	return res;
