@@ -5,7 +5,7 @@
 
 import {} from "@std/assert";
 
-Deno.test("", () => {
+Deno.test("Case 1", () => {
 	// @test
 
 	// const $result =
