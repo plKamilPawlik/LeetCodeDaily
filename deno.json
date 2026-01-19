@@ -9,6 +9,7 @@
 	"fmt": {
 		"indentWidth": 4,
 		"lineWidth": 96,
-		"useTabs": true
+		"useTabs": true,
+		"proseWrap": "preserve"
 	}
 }
