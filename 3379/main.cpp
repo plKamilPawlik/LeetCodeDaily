@@ -1,14 +1,15 @@
+#include <vector>
+
 class Solution
 {
 public:
-    vector<int> constructTransformedArray(vector<int> &nums)
+    std::vector<int> constructTransformedArray(std::vector<int> &nums)
     {
-        auto len = nums.size();
-        auto res = vector<int>(len);
+        int size = nums.size();
+        auto res = std::vector<int>(size);
 
-        for (int i = 0; i < len; i++)
-        {
-            res[i] = nums[i] ? (i + nums[i]) % len : 0;
+        for (int i = 0; i < size; i++) {
+            res[i] = nums[((i + nums[i]) % size + size) % size];
         }
 
         return res;
