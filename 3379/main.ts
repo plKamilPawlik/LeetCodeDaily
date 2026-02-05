@@ -1,12 +1,5 @@
 function constructTransformedArray(nums: number[]): number[] {
-	return nums.map((v, i) => {
-		const abs = Math.abs(v) % nums.length;
-
-		if (v > 0) return nums.at((i + abs) % nums.length)!;
-		if (v < 0) return nums.at((i - abs) % nums.length)!;
-
-		return v;
-	});
+	return nums.map((v, i) => v ? nums.at((i + v) % nums.length)! : 0);
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
