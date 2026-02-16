@@ -1,17 +1,22 @@
 function champagneTower(poured: number, query_row: number, query_glass: number): number {
-	const tower = Array.from({ length: 100 }, (_, i) => Array(i + 1).fill(0));
-	tower[0][0] = poured;
+	if (query_row === 0) return Math.min(poured, 1);
 
-	for (let i = 0; i < tower.length - 1; i++) {
-		for (let j = 0; j < tower[i].length; j++) {
-			const overflow = Math.max(tower[i][j] - 1, 0);
+	let curr: number[] = [poured];
+	let next: number[] = [0, 0];
 
-			tower[i + 1][j] += overflow / 2;
-			tower[i + 1][j + 1] += overflow / 2;
+	for (let i = 0; i < query_row; i++) {
+		for (let j = 0; j < curr.length; j++) {
+			const overflow = Math.max(curr[j] - 1, 0);
+
+			next[j] += overflow / 2;
+			next[j + 1] += overflow / 2;
 		}
+
+		curr = next;
+		next = Array(curr.length + 1).fill(0);
 	}
 
-	return Math.min(tower[query_row][query_glass], 1);
+	return Math.min(curr[query_glass], 1);
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
