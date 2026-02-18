@@ -1,15 +1,12 @@
 function hasAlternatingBits(n: number): boolean {
-	const str = n.toString(2);
-	let set = str[0] === "1";
+	let b = BigInt(n);
+	let f = b & 1n;
 
-	for (const bit of str) {
-		if (set) {
-			if (bit === "0") return false;
-		} else {
-			if (bit === "1") return false;
-		}
+	while (b) {
+		if ((b & 1n) !== f) return false;
 
-		set = !set;
+		b >>= 1n;
+		f ^= 1n;
 	}
 
 	return true;
