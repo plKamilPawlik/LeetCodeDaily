@@ -1,22 +1,29 @@
 function binaryGap(n: number): number {
-	const s = n.toString(2);
+	const INT_SIZE = 32;
 
-	let p = s.indexOf("1");
-	let q = p + 1;
+	let p = -1;
+	let q = 1;
 
-	let gap = 0;
+	for (let i = 0; p < 0 && i < INT_SIZE; i++) {
+		if (n & (1 << i)) p = i;
+	}
 
-	while (q < s.length) {
-		while (q < s.length && s[q] !== "1") q++;
-		if (q === s.length) break;
+	if (p < 0) return 0;
+	else q += p;
 
-		gap = Math.max(gap, q - p);
+	let maxGap = 0;
+
+	while (q < INT_SIZE) {
+		while (q < INT_SIZE && (n & (1 << q)) === 0) q++;
+		if (q === INT_SIZE) break;
+
+		maxGap = Math.max(maxGap, q - p);
 
 		p = q;
 		q++;
 	}
 
-	return gap;
+	return maxGap;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
