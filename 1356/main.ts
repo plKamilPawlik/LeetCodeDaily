@@ -1,21 +1,23 @@
 function sortByBits(arr: number[]): number[] {
-	const countBits = (n: number): number => {
-		let count = n & 1;
+	const memo = new Map<number, number>();
+	const count = (val: number): number => {
+		let bits = val & 1;
 
-		while ((n >>= 1)) if (n & 1) count++;
+		while ((val >>= 1)) if (val & 1) bits++;
 
-		return count;
+		return bits;
 	};
 
-	return arr.sort((a, b) => {
-		const _a = countBits(a);
-		const _b = countBits(b);
+	for (const val of arr) {
+		if (!memo.has(val)) memo.set(val, count(val));
+	}
 
-		if (_a === _b) {
-			return a - b;
-		} else {
-			return _a - _b;
-		}
+	return arr.sort((a, b) => {
+		const u = memo.get(a)!;
+		const v = memo.get(b)!;
+
+		if (u === v) return a - b;
+		else return u - v;
 	});
 }
 
