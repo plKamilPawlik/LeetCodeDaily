@@ -1,26 +1,26 @@
 function numSteps(s: string): number {
-	const bits = s.split("").reverse();
+	const b = [...s].reverse();
 
-	const plusOne = (): void => {
+	const plusOne = () => {
 		let carry = true;
 
-		for (let i = 0; i < bits.length && carry; i++) {
-			if (bits[i] === "1") {
-				bits[i] = "0";
+		for (let i = 0; i < b.length && carry; i++) {
+			if (b[i] === "1") {
+				b[i] = "0";
 			} else {
-				bits[i] = "1";
+				b[i] = "1";
 				carry = false;
 			}
 		}
 
-		if (carry) bits.push("1");
+		if (carry) b.push("1");
 	};
 
 	let steps = 0;
 
-	while (bits.length > 1) {
-		if (bits[0] === "1") plusOne();
-		else bits.shift();
+	while (b.length > 1) {
+		if (b[0] === "1") plusOne();
+		else b.shift();
 
 		steps++;
 	}
