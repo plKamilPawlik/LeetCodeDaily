@@ -12,29 +12,27 @@ function minSwaps(grid: number[][]): number {
 	if (rows.some(([_, zeros], index) => zeros < index)) return -1;
 
 	rows.sort((a, b) => a[0] - b[0]);
-	let swaps = 0;
+	let numSwaps = 0;
 
 	for (let i = 0; i < rows.length - 1; i++) {
 		const expectZeros = rows.length - i - 1;
 		if (rows[i][1] >= expectZeros) continue;
 
-		let swapIdx!: number;
+		let swapIdx = -1;
 
-		for (let j = i + 1; j < rows.length; j++) {
-			if (rows[j][1] < expectZeros) continue;
-
-			swapIdx = j;
-			break;
+		for (let j = i + 1; j < rows.length && swapIdx === -1; j++) {
+			if (rows[j][1] >= expectZeros) swapIdx = j;
 		}
 
 		while (swapIdx !== i) {
 			[rows[swapIdx], rows[swapIdx - 1]] = [rows[swapIdx - 1], rows[swapIdx]];
+
+			numSwaps++;
 			swapIdx--;
-			swaps++;
 		}
 	}
 
-	return swaps;
+	return numSwaps;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
