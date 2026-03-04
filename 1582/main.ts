@@ -2,38 +2,33 @@ function numSpecial(mat: number[][]): number {
 	const M = mat.length;
 	const N = mat[0].length;
 
-	const isSpecialCol = (n: number): boolean => {
-		let countOnes = 0;
-
-		for (let m = 0; m < M && countOnes < 2; m++) {
-			if (mat[m][n] === 1) countOnes++;
-		}
-
-		return countOnes === 1;
-	};
-
-	const isSpecialRow = (m: number): boolean => {
-		let countOnes = 0;
-
-		for (let n = 0; n < N && countOnes < 2; n++) {
-			if (mat[m][n] === 1) countOnes++;
-		}
-
-		return countOnes === 1;
-	};
-
-	let countSpecials = 0;
+	const ones_row = new Array<number>(M).fill(0);
+	const ones_col = new Array<number>(N).fill(0);
 
 	for (let m = 0; m < M; m++) {
 		for (let n = 0; n < N; n++) {
-			if (!isSpecialCol(n)) continue;
-			if (!isSpecialRow(m)) continue;
-
-			countSpecials += mat[m][n];
+			ones_row[m] += mat[m][n];
 		}
 	}
 
-	return countSpecials;
+	for (let n = 0; n < N; n++) {
+		for (let m = 0; m < M; m++) {
+			ones_col[n] += mat[m][n];
+		}
+	}
+
+	let countSpecial = 0;
+
+	for (let m = 0; m < M; m++) {
+		for (let n = 0; n < N; n++) {
+			if (ones_row[m] !== 1) continue;
+			if (ones_col[n] !== 1) continue;
+
+			countSpecial += mat[m][n];
+		}
+	}
+
+	return countSpecial;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
