@@ -1,13 +1,13 @@
 function minOperations(s: string): number {
-	const s0 = Array.from({ length: s.length }, (_, i) => i % 2).join("");
-	const s1 = "1".concat(s0.substring(0, s.length - 1));
-
 	let c0 = 0;
 	let c1 = 0;
 
 	for (let i = 0; i < s.length; i++) {
-		if (s[i] !== s0[i]) c0++;
-		if (s[i] !== s1[i]) c1++;
+		const s0 = i & 1 ? "1" : "0";
+		const s1 = i & 1 ? "0" : "1";
+
+		if (s[i] !== s0) c0++;
+		if (s[i] !== s1) c1++;
 	}
 
 	return Math.min(c0, c1);
