@@ -1,11 +1,13 @@
 function canBeEqual(s1: string, s2: string): boolean {
-	const [a, b, c, d] = [...s2];
+	let pass_0_2 = false;
+	let pass_1_3 = false;
 
-	if (s1 === [c, b, a, d].join("")) return true;
-	if (s1 === [c, d, a, b].join("")) return true;
-	if (s1 === [a, d, c, b].join("")) return true;
+	if (s1[0] === s2[0] && s1[2] === s2[2]) pass_0_2 = true;
+	if (s1[0] === s2[2] && s1[2] === s2[0]) pass_0_2 = true;
+	if (s1[1] === s2[1] && s1[3] === s2[3]) pass_1_3 = true;
+	if (s1[1] === s2[3] && s1[3] === s2[1]) pass_1_3 = true;
 
-	return s1 === s2;
+	return pass_0_2 && pass_1_3;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
