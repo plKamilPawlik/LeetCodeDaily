@@ -1,13 +1,15 @@
 function checkStrings(s1: string, s2: string): boolean {
-	const s1_1 = [...s1].filter((_, i) => i % 2 === 1).sort().join();
-	const s2_1 = [...s2].filter((_, i) => i % 2 === 1).sort().join();
+	if (s1.length !== s2.length) return false;
 
-	if (s1_1 !== s2_1) return false;
+	const chars = new Int32Array(0xff);
 
-	const s1_2 = [...s1].filter((_, i) => i % 2 === 0).sort().join();
-	const s2_2 = [...s2].filter((_, i) => i % 2 === 0).sort().join();
+	for (let i = 0; i < s1.length; i++) {
+		const offset = (i & 1) << 7;
+		chars[offset + s1.charCodeAt(i)]++;
+		chars[offset + s2.charCodeAt(i)]--;
+	}
 
-	return s1_2 === s2_2;
+	return chars.every((count) => count === 0);
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
