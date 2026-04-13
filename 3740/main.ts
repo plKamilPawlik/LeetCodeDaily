@@ -3,8 +3,9 @@ function minimumDistance(nums: number[]): number {
 
 	for (let i = 0; i < nums.length - 2; i++) {
 		for (let j = i + 1; j < nums.length - 1; j++) {
+			if (nums[i] !== nums[j]) continue;
+
 			for (let k = j + 1; k < nums.length; k++) {
-				if (nums[i] !== nums[j]) continue;
 				if (nums[i] !== nums[k]) continue;
 
 				d = Math.min(d, Math.abs(i - j) + Math.abs(j - k) + Math.abs(k - i));
