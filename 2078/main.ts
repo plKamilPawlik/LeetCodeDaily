@@ -1,29 +1,17 @@
 function maxDistance(colors: number[]): number {
-	const index = new Map<number, number[]>();
+	let maxDistance = 0;
 
-	for (let i = 0; i < colors.length; i++) {
-		const color = colors[i];
+	for (let i = 0; i < colors.length - 1; i++) {
+		for (let j = i + 1; j < colors.length; j++) {
+			if (colors[i] === colors[j]) continue;
 
-		if (index.has(color)) {
-			index.get(color)!.push(i);
-		} else {
-			index.set(color, [i]);
+			if (maxDistance < j - i) {
+				maxDistance = j - i;
+			}
 		}
 	}
 
-	const keys = Array.from(index.keys());
-	let maxDist = 0;
-
-	for (let i = 0; i < keys.length - 1; i++) {
-		for (let j = i + 1; j < keys.length; j++) {
-			const d1 = Math.abs(index.get(keys[i])!.at(0)! - index.get(keys[j])!.at(-1)!);
-			const d2 = Math.abs(index.get(keys[i])!.at(-1)! - index.get(keys[j])!.at(0)!);
-
-			maxDist = Math.max(maxDist, d1, d2);
-		}
-	}
-
-	return maxDist;
+	return maxDistance;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
