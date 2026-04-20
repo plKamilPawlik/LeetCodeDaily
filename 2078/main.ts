@@ -2,12 +2,11 @@ function maxDistance(colors: number[]): number {
 	let maxDistance = 0;
 
 	for (let i = 0; i < colors.length - 1; i++) {
-		for (let j = i + 1; j < colors.length; j++) {
+		for (let j = colors.length - 1; j > i; j--) {
 			if (colors[i] === colors[j]) continue;
+			else maxDistance = Math.max(maxDistance, j - i);
 
-			if (maxDistance < j - i) {
-				maxDistance = j - i;
-			}
+			break;
 		}
 	}
 
