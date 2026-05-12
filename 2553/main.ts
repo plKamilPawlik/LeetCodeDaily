@@ -1,8 +1,15 @@
-function separateDigits(nums: number[]): number[] {
-	const string = nums.join("");
-	const digits = [...string].map((d) => Number(d));
+function parseDigits(num: number): number[] {
+	const digits = [num % 10];
 
-	return digits;
+	while ((num = Math.floor(num / 10))) {
+		digits.push(num % 10);
+	}
+
+	return digits.reverse();
+}
+
+function separateDigits(nums: number[]): number[] {
+	return nums.map(parseDigits).flat();
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
