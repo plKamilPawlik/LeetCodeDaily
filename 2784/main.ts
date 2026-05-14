@@ -1,11 +1,16 @@
 function isGood(nums: number[]): boolean {
-	nums.sort((a, b) => a - b);
+	const count = new Array<number>(nums.length).fill(0);
 
-	for (let i = 0; i < nums.length - 1; i++) {
-		if (nums[i] !== i + 1) return false;
+	for (let i = 0; i < nums.length; i++) {
+		if (nums[i] >= nums.length) return false;
+		count[nums[i]]++;
 	}
 
-	return nums.at(-1) === nums.at(-2);
+	for (let i = 1; i < count.length; i++) {
+		if (!count[i]) return false;
+	}
+
+	return count.at(-1) === 2;
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
