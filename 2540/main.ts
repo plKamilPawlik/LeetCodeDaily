@@ -1,8 +1,13 @@
 function getCommon(nums1: number[], nums2: number[]): number {
-	const common = new Set(nums1);
+	let p = 0;
+	let q = 0;
 
-	for (const num of nums2) {
-		if (common.has(num)) return num;
+	while (p < nums1.length && q < nums2.length) {
+		while (nums1[p] < nums2[q]) p++;
+		if (nums1[p] === nums2[q]) return nums1[p];
+
+		while (nums1[p] > nums2[q]) q++;
+		if (nums1[p] === nums2[q]) return nums1[p];
 	}
 
 	return -1;
