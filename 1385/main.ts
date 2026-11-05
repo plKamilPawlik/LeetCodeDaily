@@ -1,18 +1,21 @@
-function minDist(arr: number[], num: number): number {
-	let dist = Math.abs(arr[0] - num);
-
-	for (let i = 1; i < arr.length; i++) {
-		dist = Math.min(dist, Math.abs(arr[i] - num));
-	}
-
-	return dist;
-}
-
 function findTheDistanceValue(arr1: number[], arr2: number[], d: number): number {
-	let ans = 0;
+	arr1.sort((a, b) => a - b);
+	arr2.sort((a, b) => a - b);
 
-	for (const num of arr1) {
-		if (minDist(arr2, num) > d) ans++;
+	let ans = 0;
+	let idx = 0;
+
+	for (let i = 0; i < arr1.length; i++) {
+		let dist = Math.abs(arr1[i] - arr2[idx]);
+
+		for (let j = idx + 1; j < arr2.length; j++) {
+			if (dist >= Math.abs(arr1[i] - arr2[j])) {
+				dist = Math.abs(arr1[i] - arr2[j]);
+				idx = j;
+			} else break;
+		}
+
+		if (dist > d) ans++;
 	}
 
 	return ans;
