@@ -1,11 +1,18 @@
 function minimizeSum(nums: number[]): number {
-	nums.sort((a, b) => a - b);
+	const max = nums.slice(0, 3).sort((a, b) => b - a);
+	const min = nums.slice(0, 3).sort((a, b) => a - b);
 
-	return Math.min(
-		nums[nums.length - 1] - nums[2],
-		nums[nums.length - 2] - nums[1],
-		nums[nums.length - 3] - nums[0],
-	);
+	for (let i = 3; i < nums.length; i++) {
+		if (max[2] < nums[i]) max[2] = nums[i];
+		if (max[1] < max[2]) [max[1], max[2]] = [max[2], max[1]];
+		if (max[0] < max[1]) [max[0], max[1]] = [max[1], max[0]];
+
+		if (min[2] > nums[i]) min[2] = nums[i];
+		if (min[1] > min[2]) [min[1], min[2]] = [min[2], min[1]];
+		if (min[0] > min[1]) [min[0], min[1]] = [min[1], min[0]];
+	}
+
+	return Math.min(max[0] - min[2], max[1] - min[1], max[2] - min[0]);
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
